@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReactPeopleBackend.Data;
+using ReactPeopleBackend.Web.Models;
 using ReactWithBackend.Data;
 
 namespace ReactPeopleBackend.Web.Controllers
@@ -21,6 +22,30 @@ namespace ReactPeopleBackend.Web.Controllers
         {
             var repo = new PeopleRepo(_connectionString);
             return repo.GetPeople();
+        }
+
+        [HttpPost]
+        [Route("addperson")]
+        public void AddPerson(Person person)
+        {
+            var repo = new PeopleRepo(_connectionString);
+            repo.AddPerson(person);
+        }
+
+        [HttpPost]
+        [Route("deletepeople")]
+        public void DeletePeople(DeleteViewModel dvm)
+        {
+            var repo = new PeopleRepo(_connectionString);
+            repo.DeletePeople(dvm.DeleteList);
+        }
+
+        [HttpPost]
+        [Route("updateperson")]
+        public void UpdatePerson(Person person)
+        {
+            var repo = new PeopleRepo(_connectionString);
+            repo.UpdatePerson(person);
         }
     }
 }
